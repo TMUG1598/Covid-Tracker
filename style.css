@@ -76,7 +76,12 @@ h1, h2, h3, h4, h5, p {
 
 button.card {
     background-color: #F5F5F5;
-    transition: ease-out 0.5s;
+    transition: linear 0.3s;
+}
+
+button.card:hover {
+    background-color: #F5F5F5;
+    box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.5);
 }
 
 button.card:focus {
