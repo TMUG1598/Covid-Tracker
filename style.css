@@ -4,7 +4,7 @@
 body {
     font-family: 'Montserrat', sans-serif;
     overflow-x: hidden;
-    background-color: #C9C9C9;
+    background-color: #FEECED;
     color: #000000;
 }
 
@@ -23,7 +23,8 @@ h1, h2, h3, h4, h5, p {
 }
 
 .card {
-    box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.246);
+    box-shadow: 0 5px 5px 0 rgba(50, 11, 15, 0.5);
+
     border-radius: 10px;
 }
 
@@ -31,7 +32,8 @@ h1, h2, h3, h4, h5, p {
     border-radius: 20px;
     overflow: hidden;
     height: 500px;
-    box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.246);
+    box-shadow: 0 5px 5px 0 rgba(50, 11, 15, 0.5);
+
 }
 
 #map {
@@ -41,8 +43,12 @@ h1, h2, h3, h4, h5, p {
 
 .country-data {
     height: fit-content;
-    border-radius: 10px;
-    box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.246);
+}
+
+table {
+    box-shadow: 0 5px 5px 0 rgba(50, 11, 15, 0.5);
+    border-radius: 20px; 
+    overflow: hidden;
 }
 
 .info-container {
@@ -75,17 +81,27 @@ h1, h2, h3, h4, h5, p {
 }
 
 button.card {
-    background-color: #F5F5F5;
+    background-color: #ffffff;
     transition: linear 0.3s;
 }
 
 button.card:hover {
-    background-color: #F5F5F5;
-    box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.5);
+    box-shadow: 0 5px 10px 0 #320B0F;
 }
 
 button.card:focus {
     outline: none;
-    background-color: rgb(54, 54, 54);
+    background-color: #320B0F;
     color: white;
+}
+
+tr:hover {
+    background-color: #faafb652;
+    transition: ease-in-out 0.5s;
+}
+
+@media screen and (max-width: 1280px) {
+    #main-row {
+        flex-direction: column;
+    }
 }
