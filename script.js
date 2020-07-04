@@ -112,7 +112,7 @@ const getGlobalData = () => {
 }
 
 const showGlobalStats = (data) => {
-    document.getElementById('cases-card').innerHTML = numeral(data.cases).format();
+    document.getElementById('cases-card').innerHTML = numeral(data.cases).format('0.00a');
     document.getElementById('active-card').innerHTML = `${numeral(data.active).format('0.00a')} total`;
     document.getElementById('casesToday').innerHTML = numeral(data.todayCases).format('+0,0');
     document.getElementById('recover-card').innerHTML = `${numeral(data.recovered).format('0.00a')} total`;
@@ -135,11 +135,11 @@ const getCountryData = () => {
     .then((response) => {
         return response.json()
     }).then((data) => {
-        showOnMap(data);
-        showDataOnMapActive(data);
+        showOnMapTable(data);
+        showDataOnMap(data, 'cases');
         countrySelect(data);
         var sortedData = sortResults(data, 'active');
-        showDataInTableActive(sortedData);
+        showDataInTable(sortedData, 'active');
     })
 }
 

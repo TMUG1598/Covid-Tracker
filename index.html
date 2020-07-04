@@ -26,19 +26,11 @@
     <div class="container-fluid main">
         <div class="row d-flex" id="main-row">
             <!-- LEFT -->
-            <div class="col col-8">
+            <div class="col-8">
 
                 <!-- SEARCH -->
-                <div class="my-4 row d-flex align-items-end">
-                    <div class="col">
-                        <h1 style="font-weight: bold; color: #541319;">COVID-19 <br>TRACKER</h1>
-                    </div>
-                    <div class="col">
-                        <div class="input-group mb-3">
-                            <select class="custom-select" id="inputGroupSelect">
-                            </select>
-                        </div>
-                    </div>
+                <div class="my-4 row d-flex justify-content-center">
+                    <h1 style="font-weight: bold; color: #541319;">COVID-19 TRACKER</h1>
                 </div>
 
                 <!-- STAT CARDS -->
@@ -87,8 +79,8 @@
 
                 <!-- CHARTS -->
                 <div class="mb-3 row text-center d-flex">
-                    <div class="col">
-                        <div class="card w-100" style="height: fit-content;">
+                    <div class="col-6">
+                        <div class="card">
                             <div class="card-body">
                                 <h5 class="card-title">Worldwide Cases</h5>
                                 <div class="chart">
@@ -97,8 +89,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col">
-                        <div class="card w-100" style="height: fit-content;">
+                    <div class="col-6">
+                        <div class="card">
                             <div class="card-body">
                                 <h5 class="card-title">Worldwide Cumulative Cases</h5>
                                 <div class="chart">
@@ -112,9 +104,16 @@
             </div>
 
             <!-- RIGHT -->
-            <div class="col col-4" style="background-color: #FAAFB6; border-top-left-radius: 15px; border-bottom-left-radius: 15px; overflow: hidden;">
+            <div class="col-4" style="background-color: #FAAFB6; border-top-left-radius: 15px; border-bottom-left-radius: 15px; overflow: hidden;">
+                
+                <div class="row">
+                    <div class="input-group m-3">
+                        <select class="custom-select" id="inputGroupSelect">
+                        </select>
+                    </div>
+                </div>
                 <!-- TABLE -->
-                <div class="my-3 country-data">
+                <div class="mb-3 country-data">
                     <table class="table table-light" style="color: #320B0F;">
                         <thead style="background-color: #FEECED;">
                           <tr>
