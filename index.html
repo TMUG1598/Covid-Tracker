@@ -3,100 +3,84 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Covid Tracker</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <!-- <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css"> -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" defer></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.26.0/moment.min.js"></script>
-    <script src="https://www.gstatic.com/charts/loader.js"></script>
-    <script src="styledmap.js" defer></script>
+    <title>Covid Tracker V2</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/dropdown.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/transition.min.css">
     <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.26.0/moment.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+
+    
     <script src="charts.js"></script>
     <script src="inMap.js"></script>
     <script src="inTable.js"></script>
+    <script src="styledmap.js" defer></script>
+    <script src="click.js"></script>
 </head>
 <body>
+    <div class="container-fluid">
+        <div class="my-3 mx-2 row d-flex">
 
-    <div class="container-fluid main">
-        <div class="row d-flex" id="main-row">
             <!-- LEFT -->
-            <div class="col-8">
+            <div class="py-4 col-lg-8">
 
-                <!-- SEARCH -->
-                <div class="my-4 row d-flex justify-content-center">
-                    <h1 style="font-weight: bold; color: #541319;">COVID-19 TRACKER</h1>
-                </div>
-
-                <!-- STAT CARDS -->
-                <div class="mb-3 row">
-                    <div class="col-3">
-                        <div class="card w-100" style="width: fit-content; height: 100%;">
-                            <div class="card-body text-left">
-                                <h5 class="card-title">Total Cases</h5>
-                                <h3 class="card-text" id='cases-card' style="color: #D33F49;"></h3>
-                            </div>
+                
+                <div class="row d-flex align-items-end">
+                    <div class="col">
+                        <h1>COVID-19 Tracker</h1>
+                    </div>
+                    <div class="col">
+                        <div class="ui fluid multiple search selection dropdown" style="border-radius: 10px;">
+                            <input type="hidden" name="country">
+                            <i class="dropdown icon"></i>
+                            <div class="default text">Select Country</div>
+                            <div class="menu"></div>
                         </div>
                     </div>
-                    <div class="col-3">
-                        <button class="card w-100" id='activeCases' style="width: fit-content; height: fit-content;">
+                </div>
+
+                <div class="row">
+                    <div class="p-3 col-sm-4">
+                        <div class="card stats-card" id='activeCases'>
+                            <div class="active-bar"></div>
                             <div class="card-body text-left">
                                 <h5 class="card-title">Active Cases</h5>
-                                <h2 class="card-text" id="casesToday" style="color: #D33F49;"></h2>
-                                <p class="card-text text-muted" id='active-card'></p>
-                            </div>
-                        </button>
-                    </div>
-                    <div class="col-3">
-                        <button class="card w-100" id='recoveredCases' style="width: fit-content; height: fit-content;">
-                            <div class="card-body text-left">
-                                <h5 class="card-title">Recovered</h5>
-                                <h2 class="card-text" id="recoveredToday" style="color: #D33F49;"></h2>
-                                <p class="card-text text-muted" id='recover-card'></p>
-                            </div>
-                        </button>
-                    </div>
-                    <div class="col-3">
-                        <button class="card w-100" id='deathCases' style="width: fit-content; height: fit-content;">
-                            <div class="card-body text-left">
-                                <h5 class="card-title">Deaths</h5>
-                                <h2 class="card-text" id="deathsToday" style="color: #D33F49;"></h2>
-                                <p class="card-text text-muted" id='death-card'></p>
-                            </div>
-                        </button>
-                    </div>
-                </div>
-                
-                <!-- MAP -->
-                <div class="mb-3 mx-1 row map-info">
-                    <div id="map"></div>
-                </div>
-
-                <!-- CHARTS -->
-                <div class="mb-3 row text-center d-flex">
-                    <div class="col-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title">Worldwide Cases</h5>
-                                <div class="chart">
-                                    <canvas id="pieChart"></canvas>
-                                </div>
+                                <h2 class="card-text" id="casesToday"></h2>
+                                <p class="card-text" id='active-card'></p>
                             </div>
                         </div>
                     </div>
-                    <div class="col-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title">Worldwide Cumulative Cases</h5>
-                                <div class="chart">
-                                    <canvas id="lineGraph"></canvas>
-                                </div>
+                    <div class="p-3 col-sm-4">
+                        <div class="card stats-card" id='recoveredCases'>
+                            <div class="active-bar"></div>
+                            <div class="card-body text-left">
+                                <h5 class="card-title">Recovered</h5>
+                                <h2 class="card-text" id="recoveredToday"></h2>
+                                <p class="card-text" id='recover-card'></p>
                             </div>
+                        </div>
+                    </div>
+                    <div class="p-3 col-sm-4">
+                        <div class="card stats-card" id='deathCases'>
+                            <div class="active-bar"></div>
+                            <div class="card-body text-left">
+                                <h5 class="card-title">Deaths</h5>
+                                <h2 class="card-text" id="deathsToday"></h2>
+                                <p class="card-text" id='death-card'></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="p-3 row">
+                    <div class="p-3 col card">
+                        <h4 class="mb-3">Total Cases: <span id="total-cases"></span></h4>
+                        <div class="map-info">
+                            <div id="map"></div>
                         </div>
                     </div>
                 </div>
@@ -104,45 +88,44 @@
             </div>
 
             <!-- RIGHT -->
-            <div class="col-4" style="background-color: #FAAFB6; border-top-left-radius: 15px; border-bottom-left-radius: 15px; overflow: hidden;">
-                
-                <div class="row">
-                    <div class="input-group m-3">
-                        <select class="custom-select" id="inputGroupSelect">
-                        </select>
+            <div class="py-4 col-lg-4">
+
+                <div class="p-3 row">
+                    <div class="p-3 col card country-data">
+                        <h3 class="my-3"><span id="table-header"></span> Per Country</h3>
+                        <table class="table">
+                            <tbody id='table-data'>
+                            </tbody>
+                        </table>
                     </div>
-                </div>
-                <!-- TABLE -->
-                <div class="mb-3 country-data">
-                    <table class="table table-light" style="color: #320B0F;">
-                        <thead style="background-color: #FEECED;">
-                          <tr>
-                            <th scope="col">Country</th>
-                            <th scope="col">Total</th>
-                            <th scope="col" id="table-header"></th>
-                          </tr>
-                        </thead>
-                        <tbody id='table-data'>
-                        </tbody>
-                    </table>
                 </div>
 
-                <!-- <div class="card card-chart" style="background-color: #F5F5F5;">
-                    <div class="card-body">
-                        <div class="chart">
-                            <canvas id="pieChart"></canvas>
+                <div class="p-3 row">
+                    <div class="card w-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Worldwide Cumulative Cases</h5>
+                            <div class="chart">
+                                <canvas id="lineGraph"></canvas>
+                            </div>
                         </div>
                     </div>
-                </div> -->
+                </div>
+
             </div>
 
         </div>
     </div>
 
-    
+   
 
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/ulg/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script> -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/dropdown.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/transition.min.js"></script>
     <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBNrdSpbEPqY_BAgTPkogq0DG9V6fulqOM&callback=initMap">
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCYVjVBlZbdj5N-FHtt67iBLImWRRKBnfk&callback=initMap">
     </script>
 </body>
 </html>

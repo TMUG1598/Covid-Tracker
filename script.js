@@ -1,105 +1,32 @@
 var map;
 var infoWindow;
+var histoData = [];
+var countryData = [];
+const mapCenter = {
+    lat: 34.80746,
+    lng: -40.4796
+}
+const worldwideSelection = {
+    name: 'Worldwide', 
+    value: 'www', 
+    selected: true
+};
+
 
 initMap = () => {
     map = new google.maps.Map(document.getElementById('map'), {
-        center: {lat: 40, lng: -55},
+        center: mapCenter,
         zoom: 3,
         styles: mapStyle,
     });
 }
 
 window.onload = () => {
-    // getJHUCSSEData();
     getGlobalData();
     getHistoricalData();
-    getCountryData();
+    getCountriesData();
+    listener();
 }
-
-// const getJHUCSSEData = () => {
-//     fetch("https://disease.sh/v2/jhucsse")
-//     .then((response) => {
-//         return response.json()
-//     }).then((data) => {
-//         showOnMap(data);
-//     })
-// }
-
-// const showOnMap = (data) => {
-//     data.map((country) => {
-
-//         let countryCenter = {
-//             lat: parseInt(country.coordinates.latitude),
-//             lng: parseInt(country.coordinates.longitude)
-//         }
-
-//         var countryCircle = new google.maps.Circle({
-//             strokeColor: '#D33F49',
-//             strokeOpacity: 0.8,
-//             strokeWeight: 2,
-//             fillColor: '#D33F49',
-//             fillOpacity: 0.35,
-//             map: map,
-//             center: countryCenter,
-//             radius: Math.sqrt(country.stats.confirmed)*400
-//         });
-
-//         if (country.province == null) {
-//             var html = `
-//             <div class = "info-container">
-//                 <div class = "info-country">
-//                     ${country.country}
-//                 </div>
-//                 <div class = "info-confirmed">
-//                     <b>Active: </b> ${numeral(country.stats.confirmed).format()}
-//                 </div>
-//                 <div class = "info-recovered">
-//                     <b>Recovered: </b> ${numeral(country.stats.recovered).format()}
-//                 </div>
-//                 <div class = "info-deaths">
-//                     <b>Deaths: </b> ${numeral(country.stats.deaths).format()}
-//                 </div>
-//             </div>
-//             `;
-//         } else {
-//             var html = `
-//             <div class = "info-container">
-//                 <div class = "info-country">
-//                     ${country.country}
-//                 </div>
-//                 <div class = "info-province">
-//                     ${country.province}
-//                 </div>
-//                 <div class = "info-confirmed">
-//                     <b>Active: </b> ${numeral(country.stats.confirmed).format()}
-//                 </div>
-//                 <div class = "info-recovered">
-//                     <b>Recovered: </b> ${numeral(country.stats.recovered).format()}
-//                 </div>
-//                 <div class = "info-deaths">
-//                     <b>Deaths: </b> ${numeral(country.stats.deaths).format()}
-//                 </div>
-//             </div>
-//             `;
-//         }
-
-        
-
-//         var infoWindow = new google.maps.InfoWindow({
-//             content: html,
-//             position: countryCircle.center,
-//         });
-
-//         google.maps.event.addListener(countryCircle, 'mouseover', function () {
-//             infoWindow.open(map);
-//         });
-
-//         google.maps.event.addListener(countryCircle, 'mouseout', function () {
-//             infoWindow.close();
-//         });
-
-//     })
-// }
 
 const getGlobalData = () => {
     fetch("https://disease.sh/v2/all")
@@ -107,12 +34,47 @@ const getGlobalData = () => {
         return response.json()
     }).then((data) => {
         showGlobalStats(data);
-        showGlobalData(data);
+        setMapCenter(mapCenter.lat, mapCenter.lng, 2)
+    })
+}
+
+const getHistoricalData = () => {
+    fetch('https://corona.lmao.ninja/v2/historical/all?lastdays=300')
+    .then((response) => {
+        return response.json()
+    }).then((data) => {
+        histoData = data;
+        showHistoricalData(data, 'active');
+    })
+}
+
+const getCountriesData = () => {
+    fetch("https://corona.lmao.ninja/v2/countries")
+    .then((response) => {
+        return response.json()
+    }).then((data) => {
+        countryData = data;
+        showDataOnMap(data, 'cases');
+        setSearchList(data);
+
+        var sortedData = sortResults(data, 'active');
+        showDataInTable(sortedData, 'active');
+    })
+}
+
+const getCountryData = (countryIso) => {
+    const url = "https://disease.sh/v3/covid-19/countries/" + countryIso;
+    fetch(url)
+    .then((response)=>{
+        return response.json()
+    }).then((data)=>{
+        showGlobalStats(data);
+        setMapCenter(data.countryInfo.lat, data.countryInfo.long, 4)
     })
 }
 
 const showGlobalStats = (data) => {
-    document.getElementById('cases-card').innerHTML = numeral(data.cases).format('0.00a');
+    document.getElementById('total-cases').innerHTML = numeral(data.cases).format('0.00a');
     document.getElementById('active-card').innerHTML = `${numeral(data.active).format('0.00a')} total`;
     document.getElementById('casesToday').innerHTML = numeral(data.todayCases).format('+0,0');
     document.getElementById('recover-card').innerHTML = `${numeral(data.recovered).format('0.00a')} total`;
@@ -121,26 +83,36 @@ const showGlobalStats = (data) => {
     document.getElementById('deathsToday').innerHTML = numeral(data.todayDeaths).format('+0,0');
 }
 
-const getHistoricalData = () => {
-    fetch('https://corona.lmao.ninja/v2/historical/all?lastdays=300')
-    .then((response) => {
-        return response.json()
-    }).then((data) => {
-        showHistoricalData(data);
+const setSearchList = (data) => {
+    let searchList = [worldwideSelection];
+    data.forEach((country) => {
+        searchList.push({
+            name: country.country,
+            value: country.countryInfo.iso3,
+        })
     })
+    initDropdown(searchList);
 }
 
-const getCountryData = () => {
-    fetch("https://corona.lmao.ninja/v2/countries")
-    .then((response) => {
-        return response.json()
-    }).then((data) => {
-        showOnMapTable(data);
-        showDataOnMap(data, 'cases');
-        countrySelect(data);
-        var sortedData = sortResults(data, 'active');
-        showDataInTable(sortedData, 'active');
-    })
+const initDropdown = (searchList) => {
+    $('.ui.dropdown').dropdown({
+        values: searchList,
+        onChange: function(value, text) {
+            if(value !== worldwideSelection.value){
+                getCountryData(value);
+            } else {
+                getGlobalData();
+            }
+        }
+    });
+}
+
+const setMapCenter = (lat, long, zoom) => {
+    map.setZoom(zoom);
+    map.panTo({
+        lat: lat,
+        lng: long,
+    });
 }
 
 function sortResults(data, prop) {
@@ -148,16 +120,4 @@ function sortResults(data, prop) {
         return (b[prop] > a[prop]) ? 1 : ((b[prop] < a[prop]) ? -1 : 0);
     });
     return data;
-}
-
-
-
-const countrySelect = (data) => {
-    var html = `
-        <option selected>Country</option>
-    `;
-    data.forEach((country, index) => {
-        html += `<option value=${index}>${country.country}</option>`;
-    })
-    document.getElementById('inputGroupSelect').innerHTML = html;
 }

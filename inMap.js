@@ -6,30 +6,6 @@ const clearTheMap = () => {
     }
 };
 
-const showOnMapTable = (data) => {
-    document.getElementById("activeCases").addEventListener("click", function () {
-        clearTheMap();
-        showDataOnMap(data, 'cases');
-        var sortedData = sortResults(data, 'active');
-        showDataInTable(sortedData , 'active');
-    });
-    document.getElementById("recoveredCases").addEventListener("click", function () {
-        clearTheMap();
-        showDataOnMap(data, 'recovered');
-        var sortedData = sortResults(data, 'recovered');
-        // showDataInTableRecovered(sortedData);
-        showDataInTable(data, 'recovered');
-
-    });
-    document.getElementById("deathCases").addEventListener("click", function () {
-        clearTheMap();
-        showDataOnMap(data, 'deaths');
-        var sortedData = sortResults(data, 'deaths');
-        // showDataInTableDeaths(sortedData);
-        showDataInTable(data, 'deaths');
-    });
-}
-
 const showDataOnMap = (data, prop) => {
     data.forEach((country) => {
 
@@ -38,16 +14,42 @@ const showDataOnMap = (data, prop) => {
             lng: country.countryInfo.long
         }
 
-        var countryCircle = new google.maps.Circle({
-            strokeColor: '#D33F49',
-            strokeOpacity: 0.8,
-            strokeWeight: 2,
-            fillColor: '#D33F49',
-            fillOpacity: 0.35,
-            map: map,
-            center: countryCenter,
-            radius: Math.sqrt(country[prop])*800
-        });
+        if (prop === 'cases') {
+            var countryCircle = new google.maps.Circle({
+                strokeColor: '#D33F49',
+                strokeOpacity: 0.8,
+                strokeWeight: 2,
+                fillColor: '#D33F49',
+                fillOpacity: 0.35,
+                map: map,
+                center: countryCenter,
+                radius: Math.sqrt(country[prop])*1000
+            });
+        } else if (prop === 'recovered') {
+            var countryCircle = new google.maps.Circle({
+                strokeColor: '#457B9D',
+                strokeOpacity: 0.8,
+                strokeWeight: 2,
+                fillColor: '#457B9D',
+                fillOpacity: 0.35,
+                map: map,
+                center: countryCenter,
+                radius: Math.sqrt(country[prop])*1000
+            });
+        } else {
+            var countryCircle = new google.maps.Circle({
+                strokeColor: '#6C757D',
+                strokeOpacity: 0.8,
+                strokeWeight: 2,
+                fillColor: '#6C757D',
+                fillOpacity: 0.35,
+                map: map,
+                center: countryCenter,
+                radius: Math.sqrt(country[prop])*1000
+            });
+        }
+
+        
 
         mapCircles.push(countryCircle);
 
