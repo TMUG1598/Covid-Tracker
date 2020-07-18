@@ -27,25 +27,25 @@ const showDataOnMap = (data, prop) => {
             });
         } else if (prop === 'recovered') {
             var countryCircle = new google.maps.Circle({
-                strokeColor: '#457B9D',
+                strokeColor: '#A8DADC',
                 strokeOpacity: 0.8,
                 strokeWeight: 2,
                 fillColor: '#457B9D',
                 fillOpacity: 0.35,
                 map: map,
                 center: countryCenter,
-                radius: Math.sqrt(country[prop])*1000
+                radius: Math.sqrt(country[prop])*1200
             });
         } else {
             var countryCircle = new google.maps.Circle({
-                strokeColor: '#6C757D',
+                strokeColor: '#f1faee',
                 strokeOpacity: 0.8,
                 strokeWeight: 2,
                 fillColor: '#6C757D',
                 fillOpacity: 0.35,
                 map: map,
                 center: countryCenter,
-                radius: Math.sqrt(country[prop])*1000
+                radius: Math.sqrt(country[prop])*2000
             });
         }
 

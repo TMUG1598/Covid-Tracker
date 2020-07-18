@@ -1,7 +1,7 @@
 var map;
 var infoWindow;
-var histoData = [];
 var countryData = [];
+var histoData = [];
 const mapCenter = {
     lat: 34.80746,
     lng: -40.4796
@@ -39,12 +39,12 @@ const getGlobalData = () => {
 }
 
 const getHistoricalData = () => {
-    fetch('https://corona.lmao.ninja/v2/historical/all?lastdays=300')
+    fetch('https://corona.lmao.ninja/v2/historical/all?lastdays=200')
     .then((response) => {
         return response.json()
     }).then((data) => {
         histoData = data;
-        showHistoricalData(data, 'active');
+        showHistoricalData(histoData, 'active');
     })
 }
 
@@ -69,7 +69,19 @@ const getCountryData = (countryIso) => {
         return response.json()
     }).then((data)=>{
         showGlobalStats(data);
-        setMapCenter(data.countryInfo.lat, data.countryInfo.long, 4)
+        setMapCenter(data.countryInfo.lat, data.countryInfo.long, 4);
+        document.getElementById('country-searched').innerHTML = data.country;
+        document.getElementById('country-search').innerHTML = data.country;
+    })
+}
+
+const getCountryHistoData = (countryIso) => {
+    fetch(`https://corona.lmao.ninja/v2/historical/${countryIso}?lastdays=200`)
+    .then((response) => {
+        return response.json()
+    }).then((data) => {
+        histoData = data.timeline;
+        showHistoricalData(histoData, 'active');
     })
 }
 
@@ -100,6 +112,7 @@ const initDropdown = (searchList) => {
         onChange: function(value, text) {
             if(value !== worldwideSelection.value){
                 getCountryData(value);
+                getCountryHistoData(value);
             } else {
                 getGlobalData();
             }

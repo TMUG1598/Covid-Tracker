@@ -10,7 +10,7 @@ const showDataInTable = (data, prop) => {
             </tr>
         `
         }
-        document.getElementById('table-header').innerHTML = '<span style="color: #E63946;">Active</span>';
+        document.getElementById('table-header').innerHTML = '<span style="color: #E63946;">Top 10 Active</span>';
     } else if (prop === 'recovered') {
         for (let index = 0; index < 10; index++) {
             html += `
@@ -20,7 +20,7 @@ const showDataInTable = (data, prop) => {
             </tr>
         `
         }
-        document.getElementById('table-header').innerHTML = '<span style="color: #457B9D;">Recovered</span>';
+        document.getElementById('table-header').innerHTML = '<span style="color: #457B9D;">Top 10 Recovered</span>';
     } else {
         for (let index = 0; index < 10; index++) {
             html += `
@@ -30,7 +30,7 @@ const showDataInTable = (data, prop) => {
             </tr>
         `
         }
-        document.getElementById('table-header').innerHTML = '<span class="text-secondary">Deaths</span>';
+        document.getElementById('table-header').innerHTML = '<span class="text-secondary">Top 10 Deaths</span>';
     }
     document.getElementById('table-data').innerHTML = html;
 }

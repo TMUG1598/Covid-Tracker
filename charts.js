@@ -3,62 +3,84 @@ const showHistoricalData = (data, prop) => {
     var values = [];
 
     if (prop === 'active') {
+
+        document.getElementById('chart-title').innerHTML = '<span style="color: #E63946;">Active Cases</span>';
+
         let histoCases = [];
+        var lastDataPoint;
         for (let date in data.cases) {
-            let newDataPoint = {
-                x: date,
-                y: data.cases[date]
+            if (lastDataPoint) {
+                let newDataPoint = {
+                    x: date,
+                    y: data.cases[date] - lastDataPoint
+                }
+                histoCases.push(newDataPoint);
             }
-            histoCases.push(newDataPoint);
+            lastDataPoint = data.cases[date]
         }
 
         values = {datasets: [
             {
                 label: 'Total Cases',
-                pointRadius: 0,
+                pointRadius: 1,
                 borderColor: '#D33F49',
-                backgroundColor: '#D33F49',
+                backgroundColor: '#D33F4950',
                 data: histoCases,
             }
         ]};
 
     } else if (prop === 'recovered') {
+
+        document.getElementById('chart-title').innerHTML = '<span style="color: #457B9D;">Recovered</span>';
+
+
         let histoRecovered = [];
+        var lastDataPoint;
         for (let date in data.recovered) {
-            let newDataPoint = {
-                x: date,
-                y: data.recovered[date]
+            if (lastDataPoint) {
+                let newDataPoint = {
+                    x: date,
+                    y: data.recovered[date] - lastDataPoint
+                }
+                histoRecovered.push(newDataPoint);
             }
-        histoRecovered.push(newDataPoint);
+            lastDataPoint = data.recovered[date]
         }
 
         values = {datasets: [
             {
                 label: 'Recovered',
-                pointRadius: 0,
+                pointRadius: 1,
                 borderColor: '#457B9D',
-                backgroundColor: '#457B9D',
+                backgroundColor: '#457B9D50',
                 data: histoRecovered,
             }
         ]};
 
     } else {
 
+        document.getElementById('chart-title').innerHTML = '<span class="text-secondary">Deaths</span>';
+
         let histoDeaths = [];
+        var lastDataPoint;
         for (let date in data.deaths) {
-            let newDataPoint = {
-                x: date,
-                y: data.deaths[date]
+            if (lastDataPoint) {
+                let newDataPoint = {
+                    x: date,
+                    y: data.deaths[date] - lastDataPoint
+                }
+                histoDeaths.push(newDataPoint);
             }
-            histoDeaths.push(newDataPoint);
+            lastDataPoint = data.deaths[date]
+            
         }
 
         values = {datasets: [
             {
                 label: 'Deaths',
-                pointRadius: 0,
+                pointRadius: 1,
                 borderColor: '#6C767D',
-                backgroundColor: '#6C767D',
+                backgroundColor: '#6C767D50',
                 data: histoDeaths,
             }
         ]};
