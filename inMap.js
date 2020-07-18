@@ -49,13 +49,12 @@ const showDataOnMap = (data, prop) => {
             });
         }
 
-        
-
         mapCircles.push(countryCircle);
 
         var html = `
             <div class = "info-container">
-                <div class="info-flag" style="background-image: url(${country.countryInfo.flag})">
+                <div class="mb-2 info-flag">
+                    <img src="${country.countryInfo.flag}" width="100%">
                 </div>
                 <div class = "info-name">
                     <h4>${country.country}</h4>

@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Covid Tracker V2</title>
+    <title>Covid Tracker | by TMG</title>
+    <link rel="icon" href="https://img.icons8.com/ultraviolet/40/000000/virus.png"/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/dropdown.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/transition.min.css">
     <link rel="stylesheet" href="style.css">
-    <script src="script.js" defer></script>
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.26.0/moment.min.js"></script>
@@ -19,7 +19,7 @@
     <script src="inMap.js"></script>
     <script src="inTable.js"></script>
     <script src="styledmap.js" defer></script>
-    <script src="click.js"></script>
+    <script src="script.js" defer></script>
 </head>
 <body>
     <div class="container-fluid">
@@ -43,32 +43,32 @@
 
                 <div class="row">
                     <div class="px-3 pb-3 col-sm-4">
-                        <div class="card stats-card" id='activeCases'>
+                        <div class="card stats-card active" onclick="changeStats('cases', 'active', this)">
                             <div class="active-bar"></div>
                             <div class="card-body text-left">
-                                <h5 class="card-title">Active Cases</h5>
-                                <h2 class="card-text" id="casesToday"></h2>
-                                <p class="card-text" id='active-card'></p>
+                                <h5 class="card-text">Active Cases</h5>
+                                <h2 class="card-title" id="casesToday"></h2>
+                                <p class="card-text text-right" id='active-card'></p>
                             </div>
                         </div>
                     </div>
                     <div class="px-3 pb-3 col-sm-4">
-                        <div class="card stats-card" id='recoveredCases'>
+                        <div class="card stats-card" onclick="changeStats('recovered', 'recovered', this)">
                             <div class="active-bar"></div>
                             <div class="card-body text-left">
-                                <h5 class="card-title">Recovered</h5>
-                                <h2 class="card-text" id="recoveredToday"></h2>
-                                <p class="card-text" id='recover-card'></p>
+                                <h5 class="card-text">Recovered</h5>
+                                <h2 class="card-title" id="recoveredToday"></h2>
+                                <p class="card-text text-right" id='recover-card'></p>
                             </div>
                         </div>
                     </div>
                     <div class="px-3 pb-3 col-sm-4">
-                        <div class="card stats-card" id='deathCases'>
+                        <div class="card stats-card" onclick="changeStats('deaths', 'deaths', this)">
                             <div class="active-bar"></div>
                             <div class="card-body text-left">
-                                <h5 class="card-title">Deaths</h5>
-                                <h2 class="card-text" id="deathsToday"></h2>
-                                <p class="card-text" id='death-card'></p>
+                                <h5 class="card-text">Deaths</h5>
+                                <h2 class="card-title" id="deathsToday"></h2>
+                                <p class="card-text text-right" id='death-card'></p>
                             </div>
                         </div>
                     </div>

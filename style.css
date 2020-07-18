@@ -30,6 +30,7 @@ h3 {
 
 p {
     font-weight: 300;
+    font-size: 1rem;
 }
 
 .card {
@@ -41,8 +42,8 @@ p {
     height: 100%;
     overflow: hidden;
 }
-/* 
-.active-bar {
+
+/* .active-bar {
     position: absolute;
     width: 100%;
     height: 8px;
@@ -57,12 +58,12 @@ p {
     transition: ease-in 0.3s;
 }
 
-.stats-card:active .active-bar {
+.active .active-bar{
     position: absolute;
     width: 100%;
     height: 8px;
     background-color: #1D3557;
-    transition: linear 0.01s;
+    transition: linear 0.5s;
 }
 
 .map-info {
@@ -75,6 +76,13 @@ p {
     height: 100%;
 }
 
+.info-flag {
+    height: fit-content;
+    width: 150px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
 .row-two{
     height: 90vh;
 }
@@ -85,8 +93,10 @@ p {
 }
 
 tr:hover {
-    background-color: #A8DADC;
+    background-color: #A8DADC50;
 }
+
+
 
 @media screen and (max-width: 600px) {
     body {
@@ -95,5 +105,9 @@ tr:hover {
 
     h1 {
         font-size: 2.5rem;
+    }
+
+    .row-two {
+        height: fit-content;
     }
 }

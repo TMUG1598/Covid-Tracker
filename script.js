@@ -6,6 +6,7 @@ const mapCenter = {
     lat: 34.80746,
     lng: -40.4796
 }
+var newCenter;
 const worldwideSelection = {
     name: 'Worldwide', 
     value: 'www', 
@@ -25,7 +26,6 @@ window.onload = () => {
     getGlobalData();
     getHistoricalData();
     getCountriesData();
-    listener();
 }
 
 const getGlobalData = () => {
@@ -122,15 +122,34 @@ const initDropdown = (searchList) => {
 
 const setMapCenter = (lat, long, zoom) => {
     map.setZoom(zoom);
-    map.panTo({
+    newCenter = {
         lat: lat,
         lng: long,
-    });
+    };
+    map.panTo(newCenter);
 }
+
 
 function sortResults(data, prop) {
     data.sort(function(a, b) {
         return (b[prop] > a[prop]) ? 1 : ((b[prop] < a[prop]) ? -1 : 0);
     });
     return data;
+}
+
+const changeStats = (prop1, prop2, elem) => {
+    clearTheMap();
+    setActiveTab(elem);
+    showDataOnMap(countryData, prop1);
+    var sortedData = sortResults(countryData, prop2);
+    showDataInTable(sortedData , prop2);
+    showHistoricalData(histoData, prop2);
+}
+
+const setActiveTab = (elem) => {
+    const activeCard = document.querySelector('.card.active');
+    console.log(activeCard);
+    activeCard.classList.remove('active');
+    elem.classList.add('active');
+    console.log(activeCard);
 }
