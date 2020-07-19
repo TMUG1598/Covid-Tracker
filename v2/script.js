@@ -3,8 +3,8 @@ var infoWindow;
 var countryData = [];
 var histoData = [];
 const mapCenter = {
-    lat: 34,
-    lng: -60
+    lat: 34.80746,
+    lng: -40.4796
 }
 var newCenter;
 const worldwideSelection = {
@@ -44,7 +44,7 @@ const getHistoricalData = () => {
         return response.json()
     }).then((data) => {
         histoData = data;
-        showHistoricalData(histoData);
+        showHistoricalData(histoData, 'active');
     })
 }
 
@@ -71,6 +71,7 @@ const getCountryData = (countryIso) => {
         showGlobalStats(data);
         setMapCenter(data.countryInfo.lat, data.countryInfo.long, 4);
         document.getElementById('country-searched').innerHTML = data.country;
+        document.getElementById('country-search').innerHTML = data.country;
     })
 }
 
@@ -80,24 +81,18 @@ const getCountryHistoData = (countryIso) => {
         return response.json()
     }).then((data) => {
         histoData = data.timeline;
-        showHistoricalData(histoData);
+        showHistoricalData(histoData, 'active');
     })
 }
 
 const showGlobalStats = (data) => {
     document.getElementById('total-cases').innerHTML = numeral(data.cases).format('0.00a');
-    document.getElementById('infected').innerHTML = numeral(data.cases / data.population *100).format('0.00');
-    document.getElementById('recovery').innerHTML = numeral(data.recovered / data.cases *100).format('0.00');
-    document.getElementById('mortality').innerHTML = numeral(data.deaths / data.cases *100).format('0.00');
-
     document.getElementById('active-card').innerHTML = `${numeral(data.active).format('0.00a')} total`;
     document.getElementById('casesToday').innerHTML = numeral(data.todayCases).format('+0,0');
     document.getElementById('recover-card').innerHTML = `${numeral(data.recovered).format('0.00a')} total`;
     document.getElementById('recoveredToday').innerHTML = numeral(data.todayRecovered).format('+0,0');
     document.getElementById('death-card').innerHTML = `${numeral(data.deaths).format('0.00a')} total`;
     document.getElementById('deathsToday').innerHTML = numeral(data.todayDeaths).format('+0,0');
-
-    showGlobalStatsChart(data);
 }
 
 const setSearchList = (data) => {
@@ -116,19 +111,13 @@ const initDropdown = (searchList) => {
         values: searchList,
         onChange: function(value, text) {
             if(value !== worldwideSelection.value){
-                changeToSearchedCountry(value);
+                getCountryData(value);
+                getCountryHistoData(value);
             } else {
                 getGlobalData();
-                getHistoricalData();
-                document.getElementById('country-searched').innerHTML = 'Worldwide';
             }
         }
     });
-}
-
-const changeToSearchedCountry = (value) => {
-    getCountryData(value);
-    getCountryHistoData(value);
 }
 
 const setMapCenter = (lat, long, zoom) => {
@@ -154,7 +143,7 @@ const changeStats = (prop1, prop2, elem) => {
     showDataOnMap(countryData, prop1);
     var sortedData = sortResults(countryData, prop2);
     showDataInTable(sortedData , prop2);
-    showHistoricalData(histoData);
+    showHistoricalData(histoData, prop2);
 }
 
 const setActiveTab = (elem) => {

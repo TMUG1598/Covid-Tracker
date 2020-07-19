@@ -1,8 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700;900&display=swap');
 
 body {
-    background-color: #FDFFFC;
-    overflow-x: hidden;
+    padding: 40px;
+    background-color: #F1FAEE;
 }
 
 h1, h2, h3, h4, h5, p {
@@ -12,16 +12,15 @@ h1, h2, h3, h4, h5, p {
 }
 
 h1 {
-    font-weight: 500;
-
+    font-weight: 300;
     font-size: 2.7rem;
-    color: #AD0B39;
+    color: #E63946;
 }
 
 h2 {
     font-weight: 700;
-    font-size: 2.6rem;
-    color: #AD0B39;
+    font-size: 2.5rem;
+    color: #E63946;
 }
 
 h3 {
@@ -36,17 +35,12 @@ p {
 
 .card {
     border-radius: 10px;
-    box-shadow: 0 5px 5px 0 #00000050;
 }
 
 .stats-card {
     width: 100%;
     height: 100%;
     overflow: hidden;
-}
-
-.main {
-    padding: 40px;
 }
 
 /* .active-bar {
@@ -60,27 +54,21 @@ p {
     position: absolute;
     width: 100%;
     height: 8px;
-    background-color: #ECBF50;
-    transition: ease-in 0.4s;
+    background-color: #A8DADC;
+    transition: ease-in 0.3s;
 }
-
-.stats-card:hover {
-    box-shadow: 0 8px 15px 0 #00000070;
-    transition: ease-in 0.4s;
-}
-
 
 .active .active-bar{
     position: absolute;
     width: 100%;
     height: 8px;
-    background-color: #292F36;
+    background-color: #1D3557;
     transition: linear 0.5s;
 }
 
 .map-info {
-    width: 100vw;
-    height: 50vh;
+    width: 100%;
+    height: 500px;
 }
 
 #map {
@@ -95,9 +83,17 @@ p {
     overflow: hidden;
 }
 
+.row-two{
+    height: 90vh;
+}
 
 .country-data {
-    height: fit-content;
+    height: max-content;
+    overflow-y: scroll;
+}
+
+tr:hover {
+    background-color: #A8DADC50;
 }
 
 
@@ -108,10 +104,10 @@ p {
     }
 
     h1 {
-        font-size: 2rem;
+        font-size: 2.5rem;
     }
 
-    .main {
-        padding: 10px 20px;
+    .row-two {
+        height: fit-content;
     }
 }

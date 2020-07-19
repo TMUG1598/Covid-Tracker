@@ -3,25 +3,24 @@ const showDataInTable = (data, prop) => {
 
     if (prop === 'active') {
         for (let index = 0; index < 10; index++) {
-            var countryCode = data[index].countryInfo.iso3;
             html += `
             <tr>
                 <td><b>${data[index].country}</b></td>
-                <td><span style="color: #AD0B39;">${numeral(data[index][prop]).format()}</span></td>
+                <td><span class="text-danger">${numeral(data[index][prop]).format()}</span></td>
             </tr>
         `
         }
-        document.getElementById('table-header').innerHTML = '<span style="color: #AD0B39;">Top 10 Active</span>';
+        document.getElementById('table-header').innerHTML = '<span style="color: #E63946;">Top 10 Active</span>';
     } else if (prop === 'recovered') {
         for (let index = 0; index < 10; index++) {
             html += `
             <tr>
                 <td><b>${data[index].country}</b></td>
-                <td><span style="color: #DD882C;">${numeral(data[index].recovered).format()}</span></td>
+                <td><span style="color: #457B9D;">${numeral(data[index].recovered).format()}</span></td>
             </tr>
         `
         }
-        document.getElementById('table-header').innerHTML = '<span style="color: #DD882C;">Top 10 Recovered</span>';
+        document.getElementById('table-header').innerHTML = '<span style="color: #457B9D;">Top 10 Recovered</span>';
     } else {
         for (let index = 0; index < 10; index++) {
             html += `
@@ -35,3 +34,5 @@ const showDataInTable = (data, prop) => {
     }
     document.getElementById('table-data').innerHTML = html;
 }
+
+{/* <td><div class="flag" style="background-image: url(${data[index].countryInfo.flag});"></div></td> */}

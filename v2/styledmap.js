@@ -3,7 +3,7 @@ var mapStyle = [
       "elementType": "geometry",
       "stylers": [
         {
-          "color": "#292F36"
+          "color": "#1D3557"
         }
       ]
     },
@@ -19,7 +19,7 @@ var mapStyle = [
       "elementType": "labels.text.fill",
       "stylers": [
         {
-          "color": "#ffffff"
+          "color": "#757575"
         }
       ]
     },
@@ -27,7 +27,7 @@ var mapStyle = [
       "elementType": "labels.text.stroke",
       "stylers": [
         {
-          "color": "#292F36"
+          "color": "#1D3557"
         }
       ]
     },
@@ -36,7 +36,7 @@ var mapStyle = [
       "elementType": "geometry",
       "stylers": [
         {
-          "color": "#000000"
+          "color": "#757575"
         },
         {
           "visibility": "off"
@@ -48,7 +48,7 @@ var mapStyle = [
       "elementType": "labels.text.fill",
       "stylers": [
         {
-          "color": "#FDFFFC"
+          "color": "#9e9e9e"
         }
       ]
     },
@@ -99,7 +99,7 @@ var mapStyle = [
       "elementType": "labels.text.fill",
       "stylers": [
         {
-          "color": "#000000"
+          "color": "#757575"
         }
       ]
     },
@@ -223,7 +223,7 @@ var mapStyle = [
       "elementType": "labels.text.fill",
       "stylers": [
         {
-          "color": "#000000"
+          "color": "#757575"
         }
       ]
     },
@@ -232,7 +232,7 @@ var mapStyle = [
       "elementType": "geometry",
       "stylers": [
         {
-          "color": "#ECBF50"
+          "color": "#A8DADC"
         }
       ]
     },
@@ -250,7 +250,7 @@ var mapStyle = [
       "elementType": "labels.text.fill",
       "stylers": [
         {
-          "color": "#ffffff"
+          "color": "#3d3d3d"
         }
       ]
     }

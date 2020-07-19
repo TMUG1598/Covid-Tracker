@@ -16,10 +16,10 @@ const showDataOnMap = (data, prop) => {
 
         if (prop === 'cases') {
             var countryCircle = new google.maps.Circle({
-                strokeColor: '#AD0B39',
+                strokeColor: '#D33F49',
                 strokeOpacity: 0.8,
                 strokeWeight: 2,
-                fillColor: '#AD0B39',
+                fillColor: '#D33F49',
                 fillOpacity: 0.35,
                 map: map,
                 center: countryCenter,
@@ -27,10 +27,10 @@ const showDataOnMap = (data, prop) => {
             });
         } else if (prop === 'recovered') {
             var countryCircle = new google.maps.Circle({
-                strokeColor: '#FBF674',
+                strokeColor: '#A8DADC',
                 strokeOpacity: 0.8,
                 strokeWeight: 2,
-                fillColor: '#FBF674',
+                fillColor: '#457B9D',
                 fillOpacity: 0.35,
                 map: map,
                 center: countryCenter,

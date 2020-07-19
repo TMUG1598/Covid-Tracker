@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Covid Tracker | by TMG</title>
+    <link rel="icon" href="https://img.icons8.com/ultraviolet/40/000000/virus.png"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/dropdown.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/transition.min.css">
+    <link rel="stylesheet" href="style.css">
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.26.0/moment.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+
+    
+    <script src="charts.js"></script>
+    <script src="inMap.js"></script>
+    <script src="inTable.js"></script>
+    <script src="styledmap.js" defer></script>
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <div class="container-fluid">
+
+        <div class="row">
+
+            <div class="col-lg-7 d-flex flex-column justify-content-end">
+                <div class="py-3 row d-flex align-items-end">
+                    <div class="col-sm-6">
+                        <h1>COVID-19 Tracker</h1>
+                    </div>
+                    <div class="pt-3 col-sm-6">
+                        <div class="ui fluid search selection dropdown" style="border-radius: 10px;">
+                            <input type="hidden" name="country">
+                            <i class="dropdown icon"></i>
+                            <div class="text"></div>
+                            <div class="menu"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="px-3 pb-3 col-sm-4">
+                        <div class="card stats-card active" onclick="changeStats('cases', 'active', this)">
+                            <div class="active-bar"></div>
+                            <div class="card-body text-left">
+                                <h5 class="card-text">Active Cases</h5>
+                                <h2 class="card-title" id="casesToday"></h2>
+                                <p class="card-text text-right" id='active-card'></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="px-3 pb-3 col-sm-4">
+                        <div class="card stats-card" onclick="changeStats('recovered', 'recovered', this)">
+                            <div class="active-bar"></div>
+                            <div class="card-body text-left">
+                                <h5 class="card-text">Recovered</h5>
+                                <h2 class="card-title" id="recoveredToday"></h2>
+                                <p class="card-text text-right" id='recover-card'></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="px-3 pb-3 col-sm-4">
+                        <div class="card stats-card" onclick="changeStats('deaths', 'deaths', this)">
+                            <div class="active-bar"></div>
+                            <div class="card-body text-left">
+                                <h5 class="card-text">Deaths</h5>
+                                <h2 class="card-title" id="deathsToday"></h2>
+                                <p class="card-text text-right" id='death-card'></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-5">
+                <div class="pb-3 row">
+                    <div class="col">
+                        <div class="card w-100" style="height: 100%;">
+                            <div class="card-body">
+                                <h5 class="card-title"><span id="country-search">Worldwide</span>: <span id='chart-title'></span> Per Day</h5>
+                                <div class="chart">
+                                    <canvas id="lineGraph"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row">
+
+            <div class="col-lg-7">
+                <div class="row">
+                    <div class="pb-3 col">
+                        <div class="card">
+                            <div class="card-body row-two">
+                                <div class="mb-3 d-flex flex-wrap justify-content-between">
+                                    <h4 class="">Total Cases: <span id="total-cases"></span></h4>
+                                    <h4 class="" id="country-searched" style="color: #457B9D;">Worldwide</h4>
+                                </div>
+                                <div class="map-info">
+                                    <div id="map"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-lg-5">
+
+                <div class="row">
+                    <div class="pb-3 col">
+                        <div class="card">
+                            <div class="card-body row-two">
+                                <h4 class="mb-3">Countries: <span id="table-header"></span></h4>
+                                <div class="country-data">
+                                    <table class="table">
+                                        <tbody id='table-data'>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+   
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/ulg/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigizzn="anonymous"></script> -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/dropdown.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/transition.min.js"></script>
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCYVjVBlZbdj5N-FHtt67iBLImWRRKBnfk&callback=initMap">
+    </script>
+</body>
+</html>
