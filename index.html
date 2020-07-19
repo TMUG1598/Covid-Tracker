@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Covid Tracker | by TMG</title>
+    <title>Covid Tracker by Tatyana</title>
     <link rel="icon" href="https://img.icons8.com/ios-filled/50/000000/virus.png" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -12,6 +12,7 @@
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/transition.min.css">
     <link rel="stylesheet" href="style.css">
+
     <script src="https://kit.fontawesome.com/c7788ef730.js" crossorigin="anonymous"></script>
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
@@ -24,11 +25,12 @@
     <script src="inTable.js"></script>
     <script src="styledmap.js" defer></script>
     <script src="script.js" defer></script>
+
 </head>
 
 <body>
-    <div class="py-3 px-4 container">
-        <div class="row">
+    <div class="p-3 container">
+        <div class="row d-flex align-items-end">
             <div class="col-md-6">
                 <h1><i class="fas fa-virus"></i> COVID-19 Tracker</h1>
             </div>
@@ -141,7 +143,7 @@
             <div class="p-3 col-lg-4">
                 <div class="card">
                     <div class="card-body" style="height: 50vh; overflow: scroll;">
-                        <h4 class="mb-3">Countries: <span id="table-header"></span></h4>
+                        <h3 class="mb-3">Countries: <span id="table-header"></span></h3>
                         <div class="country-data">
                             <table class="table">
                                 <tbody id='table-data'>
@@ -170,13 +172,151 @@
                 </div>
             </div>
 
-            
+        </div>
+
+        <div class="row">
+            <div class="p-3 col">
+                <div class="card">
+                    <div class="card-body">
+                        <nav>
+                            <div class="nav nav-tabs flex-column flex-sm-row" id="nav-tab" role="tablist" style="color: #DD882C;">
+                              <a class="nav-item nav-link active" id="symptoms-tab" data-toggle="tab" href="#symptoms" role="tab" aria-controls="symptoms" aria-selected="true">Symptoms</a>
+                              <a class="nav-item nav-link" id="prevention-tab" data-toggle="tab" href="#prevention" role="tab" aria-controls="prevention" aria-selected="false">Prevention</a>
+                              <a class="nav-item nav-link" id="resources-tab" data-toggle="tab" href="#resources" role="tab" aria-controls="resources" aria-selected="false">Resources</a>
+                            </div>
+                          </nav>
+                          <div class="tab-content" id="nav-tabContent">
+
+                            <div class="tab-pane fade show active " id="symptoms" role="tabpanel" aria-labelledby="symptoms-tab">
+                                <div class="d-flex flex-column justify-content-center align-items-center">
+                                    <div class="icon-set">
+                                        <h4 class="pt-5 text-center" style="color: #AD0B39;">Most Common</h4>
+                                        <div class="d-flex flex-wrap justify-content-center align-items-center">
+                                            <div class="m-3 p-3 icon-card">
+                                                <img src="https://image.flaticon.com/icons/svg/2966/2966394.svg" alt="" width="100px">
+                                                <h4 class="pt-2 text-center" style="color: #AD0B39;">Fever</h4>
+                                            </div>
+                                            <div class="m-3 p-3 icon-card">
+                                                <img src="https://image.flaticon.com/icons/svg/2877/2877820.svg" alt="" width="100px">
+                                                <h4 class="pt-2 text-center" style="color: #AD0B39;">Dry Cough</h4>
+                                            </div>
+                                            <div class="m-3 p-3 icon-card">
+                                                <img src="https://image.flaticon.com/icons/svg/3017/3017369.svg" alt="" width="100px">
+                                                <h4 class="pt-2 text-center" style="color: #AD0B39;">Fatigue</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="icon-set">
+                                        <h4 class="pt-3 text-center" style="color: #292F36;">Less Common</h4>
+                                        <div class="d-flex flex-wrap justify-content-center align-items-start">
+                                            <div class="m-3 p-3 icon-card">
+                                                <img src="https://image.flaticon.com/icons/svg/2166/2166997.svg" alt="" width="80px">
+                                                <h4 class="pt-2 text-center" style="color: #292F36;">Aches and Pains</h4>
+                                            </div>
+                                            <div class="m-3 p-3 icon-card">
+                                                <img src="https://image.flaticon.com/icons/svg/2950/2950146.svg" alt="" width="80px">
+                                                <h4 class="pt-2 text-center" style="color: #292F36;">Sore Throat</h4>
+                                            </div>
+                                            <div class="m-3 p-3 icon-card">
+                                                <img src="https://image.flaticon.com/icons/svg/2854/2854976.svg" alt="" width="80px">
+                                                <h4 class="pt-2 text-center" style="color: #292F36;">Diarrhea</h4>
+                                            </div>
+                                            <div class="m-3 p-3 icon-card">
+                                                <img src="https://image.flaticon.com/icons/svg/2599/2599633.svg" alt="" width="80px">
+                                                <h4 class="pt-2 text-center" style="color: #292F36;">Conjunctivitis</h4>
+                                            </div>
+                                            <div class="m-3 p-3 icon-card">
+                                                <img src="https://image.flaticon.com/icons/svg/2877/2877824.svg" alt="" width="80px">
+                                                <h4 class="pt-2 text-center" style="color: #292F36;">Headache</h4>
+                                            </div>
+                                            <div class="m-3 p-3 icon-card">
+                                                <img src="https://www.flaticon.com/premium-icon/icons/svg/3150/3150804.svg" alt="" width="80px">
+                                                <h4 class="pt-2 text-center" style="color: #292F36;">Loss of Taste or Smell</h4>
+                                            </div>
+                                            <div class="m-3 p-3 icon-card">
+                                                <img src="https://image.flaticon.com/icons/svg/2913/2913552.svg" alt="" width="80px">
+                                                <h4 class="pt-2 text-center" style="color: #292F36;">Rash on Skin / Discoloration of Fingers or Toes</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <p class="m-3"><a href="https://www.who.int/emergencies/diseases/novel-coronavirus-2019/question-and-answers-hub/q-a-detail/q-a-coronaviruses#:~:text=symptoms" target="_blank" rel="noopener noreferrer">Learn more on who.int &RightTeeArrow;</a></p>
+                                </div>
+                                
+                            </div>
+
+                            <div class="tab-pane fade" id="prevention" role="tabpanel" aria-labelledby="prevention-tab">
+                                <div class="d-flex flex-column justify-content-center align-items-center">
+                                    <div class="icon-set">
+                                        <div class="d-flex flex-wrap justify-content-around align-items-center">
+                                            <div class="m-3 p-3 icon-card text-center">
+                                                <img src="https://image.flaticon.com/icons/svg/3079/3079188.svg" alt="" width="100px">
+                                                <h4 class="pt-2" style="color: #AD0B39;">Stay at home</h4>
+                                                <p>as much as you can.</p>
+                                            </div>
+                                            <div class="m-3 p-3 icon-card text-center">
+                                                <img src="https://image.flaticon.com/icons/svg/2932/2932309.svg" alt="" width="100px">
+                                                <h4 class="pt-2" style="color: #AD0B39;">Observe social distancing</h4>
+                                                <p>from others around you.</p>
+                                            </div>
+                                            <div class="m-3 p-3 icon-card text-center">
+                                                <img src="https://image.flaticon.com/icons/svg/2913/2913409.svg" alt="" width="100px">
+                                                <h4 class="pt-2" style="color: #AD0B39;">Wash your hands often.</h4>
+                                                <p>Use soap and water, or an alcohol-based hand rub.</p>
+                                            </div>
+                                            <div class="m-3 p-3 icon-card text-center">
+                                                <img src="https://image.flaticon.com/icons/svg/3022/3022870.svg" alt="" width="100px">
+                                                <h4 class="pt-2" style="color: #AD0B39;">Wear a mask</h4>
+                                                <p>when physical distancing is not possible.</p>
+                                            </div>
+                                            <div class="m-3 p-3 icon-card text-center">
+                                                <img src="https://image.flaticon.com/icons/svg/3159/3159875.svg" alt="" width="100px">
+                                                <h4 class="pt-2" style="color: #AD0B39;">Cover your cough / sneeze</h4>
+                                                <p>with your bent elbow or a tissue.</p>
+                                            </div>
+                                            <div class="m-3 p-3 icon-card text-center">
+                                                <img src="https://image.flaticon.com/icons/svg/2932/2932519.svg" alt="" width="100px">
+                                                <h4 class="pt-2" style="color: #AD0B39;">Seek medical attention</h4>
+                                                <p>if you have a fever, cough and difficulty breathing.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <p class="m-3"><a href="https://www.who.int/emergencies/diseases/novel-coronavirus-2019/advice-for-public" target="_blank" rel="noopener noreferrer">Learn more on who.int &RightTeeArrow;</a></p>
+                                </div>
+                                
+                            </div>
+                            <div class="tab-pane fade" id="resources" role="tabpanel" aria-labelledby="resources-tab">
+                                <div class="p-5 text-left ">
+                                    <h4 class="py-2" style="color: #AD0B39;">About this Website</h4>
+                                    <p>This is a personal project made to not only understand this pandemic but also to work on my programming skills.</p>
+                                    <h5><br/>Sources:</h5>
+                                    <ol>
+                                        <li>disease.sh - Open Disease Data</li>
+                                        <li>World Health Organization</li>
+                                        <li>CNN</li>
+                                        <li>Google News</li>
+                                    </ol>
+                                </div>
+                            </div>
+                          </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
     </div>
 
-    <div class="row py-2 text-light" style="background-color: #292F36;">
-        <p class="mx-auto">Made by T. Gonzaga</p>
+    <div class="container-fluid p-4 d-flex flex-column justify-content-center align-items-center" style="background-color: #292F36;">
+        <div class="m-2">
+            <a href="https://github.com/TMUG1598" target="_blank" rel="noopener noreferrer">
+                <i class="fab fa-github-alt" style="font-size: 2.2rem;"></i>
+            </a>
+            <span>&nbsp;</span>
+            <a href="https://www.instagram.com/tatyana.gonzaga/" target="_blank" rel="noopener noreferrer">
+                <i class="fab fa-instagram" style="font-size: 2.2rem;"></i>
+            </a>
+        </div>
+
+        <p class="text-center" style="color: #FDFFFC;">Made by Tatyana<br/> Copyright &copy; 2020</p>
     </div>
 
 
@@ -192,7 +332,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/transition.min.js"></script>
     <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCYVjVBlZbdj5N-FHtt67iBLImWRRKBnfk&callback=initMap">
-        </script>
+    </script>
 </body>
 
 </html>
